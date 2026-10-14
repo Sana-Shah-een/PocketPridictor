@@ -16,7 +16,7 @@ def render(transactions):
             amount = st.number_input("Amount (PKR)", min_value=0.0, value=0.0, step=100.0)
         with column2:
             if trans_type == "Income":
-                category = st.selectbox("Income source", ["Driving Income", "Salary", "Business", "Other Income"])
+                category = st.selectbox("Income source", CATEGORIES)
             else:
                 category = st.selectbox("Expense category", CATEGORIES)
             description = st.text_input("Description", placeholder="e.g. fuel for today's shift")
