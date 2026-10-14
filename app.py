@@ -3,7 +3,7 @@ import streamlit as st
 from datetime import date
 from pathlib import Path
 
-from pages import add_transaction, forecast, overview, transactions
+from views import add_transaction, forecast, overview, transactions
 from utils import load_data
 
 st.set_page_config(page_title="PocketPredict", page_icon="💸", layout="wide")
