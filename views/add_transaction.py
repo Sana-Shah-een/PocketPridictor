@@ -4,6 +4,7 @@ import pandas as pd
 import streamlit as st
 
 import utils
+from views import delete_transaction
 from utils import CATEGORIES, TYPES, save_data
 
 INCOME_CATEGORIES = getattr(
@@ -57,32 +58,4 @@ def render(transactions):
                 st.rerun()
 
     st.divider()
-    st.subheader("🗑️ Delete a transaction")
-    if transactions.empty:
-        st.info("No transactions available to delete.")
-        return
-
-    delete_options = {
-        f"{row.date} | {row.type} | {row.category} | Rs. {row.amount:,.0f} | {row.description or 'No description'}": index
-        for index, row in transactions.sort_values("date", ascending=False).iterrows()
-    }
-    selected_label = st.selectbox(
-        "Select transaction to delete",
-        list(delete_options),
-        key="add_transaction_delete_selection",
-    )
-    confirm_delete = st.checkbox(
-        "I understand this transaction will be permanently removed.",
-        key="add_transaction_delete_confirmation",
-    )
-    if st.button(
-        "Delete selected transaction",
-        type="secondary",
-        disabled=not confirm_delete,
-        key="add_transaction_delete_button",
-    ):
-        selected_index = delete_options[selected_label]
-        st.session_state.transactions = transactions.drop(index=selected_index).reset_index(drop=True)
-        save_data(st.session_state.transactions)
-        st.success("Transaction deleted.")
-        st.rerun()
+    delete_transaction.render(transactions, key_prefix="add_transaction_delete")

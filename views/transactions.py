@@ -1,6 +1,6 @@
 import streamlit as st
 
-from utils import save_data
+from views import delete_transaction
 
 
 def render(df):
@@ -26,22 +26,11 @@ def render(df):
     display_view["date"] = display_view.date.astype(str)
     st.dataframe(display_view, use_container_width=True, hide_index=True)
 
-    st.markdown("#### Delete a transaction")
-    if view.empty:
-        st.info("No transactions match the selected filters.")
-    else:
-        delete_options = {
-            f"{row.date} | {row.type} | {row.category} | Rs. {row.amount:,.0f} | {row.description or 'No description'}": index
-            for index, row in view.sort_values("date", ascending=False).iterrows()
-        }
-        selected_label = st.selectbox("Select transaction to delete", list(delete_options))
-        confirm_delete = st.checkbox("I understand this transaction will be permanently removed.")
-        if st.button("Delete selected transaction", type="secondary", disabled=not confirm_delete):
-            selected_index = delete_options[selected_label]
-            st.session_state.transactions = df.drop(index=selected_index).reset_index(drop=True)
-            save_data(st.session_state.transactions)
-            st.success("Transaction deleted.")
-            st.rerun()
+    delete_transaction.render(
+        view,
+        key_prefix="transactions_delete",
+        empty_message="No transactions match the selected filters.",
+    )
 
     st.download_button(
         "Download filtered transactions CSV",
