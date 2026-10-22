@@ -7,7 +7,7 @@ from utils import CATEGORIES, TYPES, save_data
 
 
 def render(transactions):
-    st.subheader("➕ Add a transaction")
+    st.markdown('<h3 class="add-transaction-title">➕ Add a transaction</h3>', unsafe_allow_html=True)
     with st.form("add_transaction", clear_on_submit=True):
         column1, column2 = st.columns(2)
         with column1:
