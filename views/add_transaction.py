@@ -3,15 +3,7 @@ from datetime import date
 import pandas as pd
 import streamlit as st
 
-import utils
-from views import delete_transaction
 from utils import CATEGORIES, TYPES, save_data
-
-INCOME_CATEGORIES = getattr(
-    utils,
-    "INCOME_CATEGORIES",
-    ["Yango Drive", "Salary", "Business", "Other Income"],
-)
 
 
 def render(transactions):
@@ -23,14 +15,14 @@ def render(transactions):
             trans_type = st.selectbox("Type", TYPES)
             amount = st.number_input("Amount (PKR)", min_value=0.0, value=0.0, step=100.0)
         with column2:
-            if trans_type == "Income":
-                category = st.selectbox("Income source", INCOME_CATEGORIES)
-                yango_number = None
-                if category == "Yango Drive":
-                    yango_number = st.selectbox("Yango Drive number", list(range(1, 13)))
-            else:
-                category = st.selectbox("Expense category", CATEGORIES)
-                yango_number = None
+            category = st.selectbox("Categories", CATEGORIES)
+            yango_number = None
+            if category == "Yango Drive":
+                yango_number = st.selectbox(
+                    "Yango Drive number",
+                    list(range(1, 13)),
+                    format_func=lambda number: f"Yango Drive {number}",
+                )
             description = st.text_input("Description", placeholder="e.g. fuel for today's shift")
         submit = st.form_submit_button("Save transaction", type="primary", use_container_width=True)
         if submit:
@@ -56,6 +48,3 @@ def render(transactions):
                 save_data(st.session_state.transactions)
                 st.success("Transaction saved.")
                 st.rerun()
-
-    st.divider()
-    delete_transaction.render(transactions, key_prefix="add_transaction_delete")

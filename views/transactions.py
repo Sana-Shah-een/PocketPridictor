@@ -1,10 +1,12 @@
 import streamlit as st
 
 from views import delete_transaction
+from utils import CATEGORIES
 
 
 def render(df):
     st.subheader("📋 Transaction history")
+    delete_transaction.render_all(df)
     if df.empty:
         st.info("No transactions yet. Add one from the sidebar.")
         return
@@ -13,7 +15,9 @@ def render(df):
     with column1:
         type_filter = st.selectbox("Type", ["All", "Income", "Expense"])
     with column2:
-        category_filter = st.selectbox("Category", ["All"] + sorted(df.category.unique().tolist()))
+        categories = set(CATEGORIES)
+        categories.update(df.category.dropna().astype(str).tolist())
+        category_filter = st.selectbox("Categories", ["All"] + sorted(categories))
 
     view = df.copy()
     if type_filter != "All":

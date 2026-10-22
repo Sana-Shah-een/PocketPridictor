@@ -38,3 +38,27 @@ def render(df, key_prefix="delete_transaction", empty_message="No transactions a
         save_data(st.session_state.transactions)
         st.success("Transaction deleted.")
         st.rerun()
+
+
+def render_all(df, key_prefix="delete_all_transactions"):
+    st.divider()
+    st.subheader("⚠️ Delete all transactions")
+    if df.empty:
+        st.info("There are no transactions to delete.")
+        return
+
+    confirm_delete_all = st.checkbox(
+        "I understand that all transactions will be permanently removed.",
+        key=f"{key_prefix}_confirmation",
+    )
+    if st.button(
+        "Delete all transactions",
+        type="secondary",
+        disabled=not confirm_delete_all,
+        key=f"{key_prefix}_button",
+    ):
+        empty_transactions = st.session_state.transactions.iloc[0:0].copy()
+        st.session_state.transactions = empty_transactions
+        save_data(empty_transactions)
+        st.success("All transactions deleted.")
+        st.rerun()

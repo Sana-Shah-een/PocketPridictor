@@ -6,8 +6,7 @@ from sklearn.metrics import mean_absolute_error
 
 APP_DIR = Path(__file__).parent
 DATA_FILE = APP_DIR / "expenses.csv"
-CATEGORIES = ["Fuel", "Food", "Family Support", "Personal", "Vehicle Maintenance", "Bills", "Other"]
-INCOME_CATEGORIES = ["Yango Drive", "Salary", "Business", "Other Income"]
+CATEGORIES = ["Yango Drive","Fuel", "Food", "Family Support", "Bills", "Other"]
 TYPES = ["Income", "Expense"]
 
 
