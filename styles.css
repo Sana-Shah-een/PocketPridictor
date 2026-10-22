@@ -4,7 +4,9 @@
 [data-testid="stSidebar"] [data-testid="stMarkdownContainer"],
 [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
 [data-testid="stSidebar"] label,
-[data-testid="stSidebar"] [data-testid="stWidgetLabel"] {
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"],
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"],
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p {
     color:white!important;
 }
 .hero {padding:1.4rem 1.6rem;border-radius:20px;color:white;background:linear-gradient(120deg,#172554,#2563eb 58%,#7c3aed);margin-bottom:1rem;}
