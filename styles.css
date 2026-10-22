@@ -5,5 +5,20 @@
 .hero h1 {margin:0 0 .3rem 0;font-size:2.15rem;}
 .hero p {margin:0;color:#e0e7ff;}
 .add-transaction-title {color:#172554!important;}
+[data-testid="stAppViewContainer"] h1,
+[data-testid="stAppViewContainer"] h2,
+[data-testid="stAppViewContainer"] h3,
+[data-testid="stAppViewContainer"] h4,
+[data-testid="stAppViewContainer"] p,
+[data-testid="stAppViewContainer"] label,
+[data-testid="stAppViewContainer"] a,
+[data-testid="stAppViewContainer"] [data-testid="stMarkdownContainer"] {
+    color:#111827!important;
+}
+.hero h1,
+.hero p {
+    color:white!important;
+}
+.hero p {color:#e0e7ff!important;}
 div[data-testid="stMetric"] {background:rgba(255,255,255,.88);border:1px solid #e0e7ff;padding:16px 18px;border-radius:16px;box-shadow:0 5px 18px #1e293b0d;}
 div[data-testid="stMetricValue"] {color:#172554;}

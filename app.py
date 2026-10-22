@@ -36,6 +36,3 @@ elif page == "Overview":
 
 elif page == "Forecast":
     forecast.render(df)
-
-st.divider()
-st.caption("PocketPredict • Python • Streamlit • Pandas • Plotly • Scikit-learn Linear Regression")
