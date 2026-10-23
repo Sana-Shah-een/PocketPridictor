@@ -71,6 +71,8 @@ def forecast_week(df):
     model.fit(daily[["day_number"]], daily["daily_expense"])
     mae = mean_absolute_error(daily["daily_expense"], model.predict(daily[["day_number"]]))
     dates = pd.date_range(daily.date.max() + pd.Timedelta(days=1), periods=7, freq="D")
-    numbers = (dates - daily.date.min()).days.to_numpy().reshape(-1, 1)
+    numbers = pd.DataFrame({
+        "day_number": (dates - daily.date.min()).days.to_numpy(),
+    })
     predictions = model.predict(numbers).clip(min=0)
     return pd.DataFrame({"date": dates, "predicted_expense": predictions}), mae, None
