@@ -22,6 +22,12 @@ pip install -r requirements.txt
 python -m streamlit run app.py
 ```
 
+## Vercel note
+
+`app.py` is the Streamlit application entrypoint. Vercel serverless functions
+require a top-level `app`, so `api/index.py` exposes the Streamlit ASGI app and
+points it at `app.py`.
+
 ## CSV format
 `date,type,category,amount,description`
 
